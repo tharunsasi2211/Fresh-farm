@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agro Mart - Register/Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    function validateLetters(input) {
+      const regex = /^[A-Za-z\s]+$/;
+      return regex.test(input.trim());
+    }
+
+    function validatePhone(phone) {
+      const regex = /^\d{10}$/;
+      return regex.test(phone.trim());
+    }
+
+    function validateAlphanumeric(input) {
+      const regex = /^[A-Za-z0-9]+$/;
+      return regex.test(input.trim());
+    }
+
+    function showError(input, msg) {
+      let errorElem = input.nextElementSibling;
+      if (!errorElem || !errorElem.classList.contains('error-msg')) {
+        errorElem = document.createElement('div');
+        errorElem.className = 'error-msg';
+        input.parentNode.insertBefore(errorElem, input.nextSibling);
+      }
+      errorElem.textContent = msg;
+      input.classList.add('invalid');
+    }
+
+    function clearError(input) {
+      let errorElem = input.nextElementSibling;
+      if (errorElem && errorElem.classList.contains('error-msg')) {
+        errorElem.textContent = '';
+      }
+      input.classList.remove('invalid');
+    }
+
+    function validateForm(event, formType) {
+      let valid = true;
+      const inputs = event.target.querySelectorAll('input');
+      inputs.forEach(input => clearError(input));
+
+      if (formType === 'register') {
+        const name = event.target.querySelector('input[name="fullname"]');
+        const address = event.target.querySelector('input[name="address"]');
+        const phone = event.target.querySelector('input[name="phone"]');
+
+        if (!validateLetters(name.value)) {
+          showError(name, 'Invalid name. Use letters only.');
+          valid = false;
+        }
+        if (!validateLetters(address.value)) {
+          showError(address, 'Invalid address. Use letters only.');
+          valid = false;
+        }
+        if (!validatePhone(phone.value)) {
+          showError(phone, 'Phone must be exactly 10 digits.');
+          valid = false;
+        }
+      }
+
+      if (formType === 'login') {
+        const username = event.target.querySelector('input[name="username"]');
+        const phone = event.target.querySelector('input[name="phone"]');
+        const password = event.target.querySelector('input[name="password"]');
+
+        if (!validateAlphanumeric(username.value)) {
+          showError(username, 'Invalid username. Use letters and numbers only.');
+          valid = false;
+        }
+        if (!validatePhone(phone.value)) {
+          showError(phone, 'Phone must be exactly 10 digits.');
+          valid = false;
+        }
+        if (password.value.length < 8) {
+          showError(password, 'Password should contain minimum 8 characters.');
+          valid = false;
+        }
+      }
+
+      if (!valid) {
+        event.preventDefault();
+      }
+    }
+
+    function toggleForms(showRegister) {
+      document.getElementById('registerForm').style.display = showRegister ? 'block' : 'none';
+      document.getElementById('loginForm').style.display = showRegister ? 'none' : 'block';
+    }
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    h1 {
+      text-align: center;
+      text-transform: uppercase;
+      color: green;
+    }
+    .error-msg {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 3px;
+      margin-bottom: 10px;
+    }
+    input.invalid {
+      border-color: red;
+    }
+    form {
+      margin-top: 20px;
+      display: block;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+    button {
+      background-color: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: darkgreen;
+    }
+    .toggle-link {
+      text-align: center;
+      margin-top: 15px;
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+    .quotes {
+      margin-bottom: 20px;
+      font-style: italic;
+      background: #e9ffe9;
+      border-left: 5px solid green;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>WELCOME TO AGRO MART</h1>
+
+  <div class="quotes">
+    <p>"Agriculture is the most healthful, most useful and most noble employment of man." – George Washington</p>
+    <p>"Farming looks mighty easy when your plow is a pencil and you're a thousand miles from the corn field." – Dwight D. Eisenhower</p>
+  </div>
+
+  <!-- Register form -->
+  <form id="registerForm" onsubmit="validateForm(event, 'register')" novalidate>
+    <h2>Register</h2>
+    <input type="text" name="fullname" placeholder="Full Name" required />
+    <input type="text" name="address" placeholder="Address" required />
+    <input type="text" name="phone" placeholder="Phone Number (10 digits)" required />
+    <button type="submit" formaction="browse.html">Submit</button>
+    <div class="toggle-link" onclick="toggleForms(false)">Already have an account? Login</div>
+  </form>
+
+  <!-- Login form -->
+  <form id="loginForm" onsubmit="validateForm(event, 'login')" novalidate style="display:none;">
+    <h2>Login</h2>
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="text" name="phone" placeholder="Phone Number (10 digits)" required />
+    <input type="password" name="password" placeholder="Password (min 8 characters)" required />
+    <button type="submit" formaction="browse.html">Login</button>
+    <div class="toggle-link" onclick="toggleForms(true)">Register</div>
+    <div class="toggle-link" onclick="alert('Forgot password feature coming soon!')">Forgot Password?</div>
+  </form>
+</body>
+</html>
