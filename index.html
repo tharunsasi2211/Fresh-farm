@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Farm - Direct Farm to Consumer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <h1>Fresh <span>Farm</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="customerLoginBtn">Customer Login</button>
+                    <button class="btn btn-primary" id="ownerLoginBtn">Owner Login</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Fresh From Farm to Your Table</h2>
+            <p>Directly connecting farmers with consumers for the freshest, healthiest fruits and vegetables. No middlemen, just quality produce straight from our fields.</p>
+            <button class="btn btn-primary btn-large" id="shopNowBtn">Shop Now</button>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-section">
+                <div class="about-content">
+                    <div class="about-header">
+                        <h2>🍎 About Us – Fresh Farm</h2>
+                        <p>Welcome to Fresh Farm, your one-stop online store for the freshest fruits and vegetables straight from local farms to your home.</p>
+                    </div>
+                    
+                    <p>At Fresh Farm, we believe that freshness is the key to good health. We work hand in hand with trusted farmers who use natural and sustainable farming methods to bring you produce that's nutrient-rich, chemical-free, and full of flavor.</p>
+                    
+                    <div class="mission-vision">
+                        <div class="mission-box">
+                            <h3>🌱 Our Mission</h3>
+                            <p>To make fresh, healthy, and locally grown fruits and vegetables easily available to everyone — without compromising on quality, freshness, or taste.</p>
+                        </div>
+                        
+                        <div class="mission-box">
+                            <h3>👁️ Our Vision</h3>
+                            <p>To become the most trusted farm-to-home service that supports local agriculture while promoting healthy eating habits in every household.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-dark); margin: 2rem 0 1rem;">🍓 What We Offer</h3>
+                    
+                    <div class="about-feature">
+                        <div class="feature-icon">🌿</div>
+                        <div class="feature-content">
+                            <h4>Farm-Fresh Quality</h4>
+                            <p>Handpicked seasonal fruits and vegetables sourced directly from local farms.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-feature">
+                        <div class="feature-icon">🚚</div>
+                        <div class="feature-content">
+                            <h4>Direct Delivery</h4>
+                            <p>Farm-to-home delivery to ensure maximum freshness and nutritional value.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-feature">
+                        <div class="feature-icon">🌍</div>
+                        <div class="feature-content">
+                            <h4>Eco-Friendly Approach</h4>
+                            <p>Eco-friendly packaging that protects both your food and the planet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-feature">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-content">
+                            <h4>Fair Prices</h4>
+                            <p>Affordable prices that support farmers and delight customers.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-dark); margin: 2rem 0 1rem;">💚 Why Choose Fresh Farm?</h3>
+                    
+                    <p>Because we're more than just an online grocery store — we're a bridge between farmers and families. Our goal is to promote healthy eating, support local agriculture, and reduce the time between harvest and your table.</p>
+                    
+                    <p style="margin-top: 1rem; font-style: italic;">At Fresh Farm, every basket you order brings you nature's freshness, delivered with care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Dashboard -->
+    <section class="customer-dashboard" id="customerDashboard">
+        <div class="container">
+            <div class="customer-welcome">
+                <h2>Welcome, <span id="customerName">Customer</span>!</h2>
+                <p>Thank you for choosing Fresh Farm. Browse our fresh products below.</p>
+            </div>
+
+            <div class="loyalty-points">
+                <h3>Your Loyalty Points</h3>
+                <div class="points-display" id="loyaltyPoints">0</div>
+                <p>Earn 1 point for every ₹100 spent. Redeem points for discounts on future orders!</p>
+            </div>
+
+            <h2 class="section-title">Available Products</h2>
+            <div class="products-grid" id="customerProductsContainer">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+
+            <div class="bulk-order-section">
+                <h3>Bulk Order Booking</h3>
+                <p>Planning an event or need large quantities? Book a bulk order slot with us!</p>
+                <form id="customerBulkOrderForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bulkOrderDate">Preferred Delivery Date</label>
+                            <input type="date" id="bulkOrderDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bulkOrderType">Order Type</label>
+                            <select id="bulkOrderType" class="form-control" required>
+                                <option value="">Select type</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="function">Function</option>
+                                <option value="restaurant">Restaurant Supply</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bulkOrderNotes">Special Requirements</label>
+                        <textarea id="bulkOrderNotes" class="form-control" rows="3" placeholder="Any specific requirements or notes..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Bulk Order Request</button>
+                </form>
+            </div>
+
+            <div class="cart-section">
+                <h2 class="section-title">Your Cart</h2>
+                <div id="customerCartItems">
+                    <!-- Cart items will be loaded here by JavaScript -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="customerSubtotal">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charge:</span>
+                        <span id="customerDeliveryCharge">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Loyalty Discount:</span>
+                        <span id="loyaltyDiscount">₹0.00</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total:</span>
+                        <span id="customerTotalAmount">₹0.00</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="container">
+            <h2 class="section-title">Our Fresh Products</h2>
+            <div class="products-grid" id="productsContainer">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart">
+        <div class="container">
+            <h2 class="section-title">Your Cart</h2>
+            <div class="cart-section">
+                <div id="cartItems">
+                    <!-- Cart items will be loaded here by JavaScript -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charge:</span>
+                        <span id="deliveryCharge">₹0.00</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total:</span>
+                        <span id="totalAmount">₹0.00</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Login Modal -->
+    <div class="modal" id="customerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-tabs">
+                <div class="tab active" data-tab="login">Login</div>
+                <div class="tab" data-tab="register">Create Account</div>
+            </div>
+            
+            <div class="tab-content active" id="loginTab">
+                <h3>Customer Login</h3>
+                <form id="customerLoginForm">
+                    <div class="form-group">
+                        <label for="loginMobile">Mobile Number</label>
+                        <input type="text" id="loginMobile" class="form-control" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+            </div>
+            
+            <div class="tab-content" id="registerTab">
+                <h3>Create Account</h3>
+                <form id="customerRegisterForm">
+                    <div class="form-group">
+                        <label for="regName">Full Name</label>
+                        <input type="text" id="regName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regCity">City/Village</label>
+                        <input type="text" id="regCity" class="form-control" placeholder="Enter your city or village" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regMobile">Mobile Number</label>
+                        <input type="text" id="regMobile" class="form-control" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" class="form-control" placeholder="Create a password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Owner Login Modal -->
+    <div class="modal" id="ownerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Owner Login</h3>
+            <form id="ownerLoginForm">
+                <div class="form-group">
+                    <label for="ownerId">Login ID</label>
+                    <input type="text" id="ownerId" class="form-control" placeholder="Enter your login ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="ownerPassword">Password</label>
+                    <input type="password" id="ownerPassword" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="secretKey">Secret Key</label>
+                    <input type="password" id="secretKey" class="form-control" placeholder="Enter secret key" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Owner Dashboard -->
+    <div class="owner-dashboard" id="ownerDashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Fresh Farm - Owner Dashboard</h2>
+                <div class="shop-status">
+                    <span>Shop Status:</span>
+                    <span class="status-indicator status-open" id="statusIndicator"></span>
+                    <span id="statusText">Open</span>
+                    <button class="btn btn-outline" id="toggleStatusBtn">Close Shop</button>
+                </div>
+                <button class="btn btn-outline" id="logoutBtn">Logout</button>
+            </div>
+            
+            <div class="dashboard-tabs">
+                <div class="dashboard-tab active" data-tab="products">Manage Products</div>
+                <div class="dashboard-tab" data-tab="billing">Billing System</div>
+                <div class="dashboard-tab" data-tab="bulk">Bulk Orders</div>
+                <div class="dashboard-tab" data-tab="reports">Sales Reports</div>
+                <div class="dashboard-tab" data-tab="settings">Shop Settings</div>
+            </div>
+            
+            <div class="dashboard-content active" id="productsTab">
+                <h3>Product Management</h3>
+                <div class="product-form">
+                    <h4>Add/Update Product</h4>
+                    <form id="productForm">
+                        <input type="hidden" id="productId">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName">Product Name</label>
+                                <input type="text" id="productName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productPrice">Price (per kg)</label>
+                                <input type="number" id="productPrice" class="form-control" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productCategory">Category</label>
+                                <select id="productCategory" class="form-control" required>
+                                    <option value="fruits">Fruits</option>
+                                    <option value="vegetables">Vegetables</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="productStock">Stock (kg)</label>
+                                <input type="number" id="productStock" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Image URL</label>
+                            <input type="text" id="productImage" class="form-control" placeholder="Enter image URL">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="productSubmitBtn">Add Product</button>
+                        <button type="button" class="btn btn-outline" id="cancelEditBtn" style="display: none;">Cancel</button>
+                    </form>
+                </div>
+                
+                <h4>Current Products</h4>
+                <div id="ownerProductsList">
+                    <!-- Owner products list will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="dashboard-content" id="billingTab">
+                <h3>Billing System</h3>
+                <div class="product-form">
+                    <h4>Generate Bill</h4>
+                    <form id="billingForm">
+                        <div class="form-group">
+                            <label for="customerName">Customer Name</label>
+                            <input type="text" id="customerName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerMobile">Customer Mobile</label>
+                            <input type="text" id="customerMobile" class="form-control" required>
+                        </div>
+                        
+                        <h5>Add Items</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="billProduct">Product</label>
+                                <select id="billProduct" class="form-control" required>
+                                    <!-- Products will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="billQuantity">Quantity (kg)</label>
+                                <input type="number" id="billQuantity" class="form-control" step="0.1" required>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="addBillItem">Add Item</button>
+                        
+                        <div id="billItemsList" style="margin-top: 20px;">
+                            <!-- Bill items will be added here -->
+                        </div>
+                        
+                        <div class="bill-preview" id="billPreview">
+                            <div class="bill-header">
+                                <h3>Fresh Farm</h3>
+                                <p>Farm Fresh Fruits & Vegetables</p>
+                                <p>Bill No: <span id="billNumber">001</span></p>
+                                <p>Date: <span id="billDate"></span> | Time: <span id="billTime"></span></p>
+                            </div>
+                            
+                            <div class="bill-details">
+                                <div><strong>Item</strong></div>
+                                <div><strong>Qty (kg)</strong></div>
+                                <div><strong>Rate</strong></div>
+                                <div><strong>Amount</strong></div>
+                            </div>
+                            
+                            <div id="billItems">
+                                <!-- Bill items will be displayed here -->
+                            </div>
+                            
+                            <div class="bill-footer">
+                                <div class="summary-row">
+                                    <span>Subtotal:</span>
+                                    <span id="billSubtotal">₹0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Tax (5%):</span>
+                                    <span id="billTax">₹0.00</span>
+                                </div>
+                                <div class="summary-row summary-total">
+                                    <span>Total:</span>
+                                    <span id="billTotal">₹0.00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="qr-code">
+                                <p><strong>Scan to Pay</strong></p>
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FreshFarmPayment" alt="QR Code for Payment">
+                                <p>UPI ID: freshfarm@upi</p>
+                            </div>
+                            
+                            <div style="margin-top: 20px; text-align: center;">
+                                <p>Thank you for your business!</p>
+                                <p>Contact: <span id="shopContact">+91 9876543210</span></p>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" id="printBill" style="margin-top: 20px;">Print Bill</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="dashboard-content" id="bulkTab">
+                <h3>Bulk Orders Management</h3>
+                <div class="product-form">
+                    <h4>Add Bulk Order</h4>
+                    <form id="bulkOrderForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bulkCustomer">Customer Name</label>
+                                <input type="text" id="bulkCustomer" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bulkEvent">Event/Function</label>
+                                <input type="text" id="bulkEvent" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bulkDate">Delivery Date</label>
+                                <input type="date" id="bulkDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bulkAdvance">Advance Paid</label>
+                                <input type="number" id="bulkAdvance" class="form-control" step="0.01" required>
+                            </div>
+                        </div>
+                        
+                        <h5>Order Items</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bulkProduct">Product</label>
+                                <select id="bulkProduct" class="form-control" required>
+                                    <!-- Products will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bulkQuantity">Quantity (kg)</label>
+                                <input type="number" id="bulkQuantity" class="form-control" step="0.1" required>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="addBulkItem">Add Item</button>
+                        
+                        <div id="bulkItemsList" style="margin-top: 20px;">
+                            <!-- Bulk order items will be added here -->
+                        </div>
+                        
+                        <div style="margin-top: 20px;">
+                            <div class="summary-row">
+                                <span>Total Amount:</span>
+                                <span id="bulkTotal">₹0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Advance Paid:</span>
+                                <span id="bulkAdvanceDisplay">₹0.00</span>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span>Balance Due:</span>
+                                <span id="bulkBalance">₹0.00</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Save Bulk Order</button>
+                    </form>
+                </div>
+
+                <h4>Current Bulk Orders</h4>
+                <div id="bulkOrdersList">
+                    <!-- Bulk orders will be listed here -->
+                </div>
+            </div>
+            
+            <div class="dashboard-content" id="reportsTab">
+                <h3>Sales Reports</h3>
+                <div class="product-form">
+                    <h4>Daily Sales Summary - <span id="reportDate"></span></h4>
+                    <div id="salesReport">
+                        <!-- Sales report will be generated here -->
+                    </div>
+                </div>
+
+                <h4>Recent Updates</h4>
+                <div id="recentUpdates">
+                    <!-- Recent updates will be listed here -->
+                </div>
+            </div>
+
+            <div class="dashboard-content" id="settingsTab">
+                <h3>Shop Settings</h3>
+                <div class="product-form">
+                    <h4>Contact Information</h4>
+                    <form id="settingsForm">
+                        <div class="form-group">
+                            <label for="shopPhone">Shop Phone Number</label>
+                            <input type="text" id="shopPhone" class="form-control" value="+91 9876543210" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="shopHours">Opening Hours</label>
+                            <input type="text" id="shopHours" class="form-control" value="7:00 AM - 9:00 PM" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="shopAddress">Shop Address</label>
+                            <textarea id="shopAddress" class="form-control" rows="3">Aravakurichi, Tamil Nadu 639201</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </form>
+                </div>
+
+                <h4>Shop Location</h4>
+                <div class="map-container">
+                    <p>Google Maps Integration - Aravakurichi, Tamil Nadu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fresh Farm</h3>
+                    <p>Direct from our farms to your home. We provide the freshest, healthiest fruits and vegetables without any middlemen.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Aravakurichi, Tamil Nadu 639201</li>
+                        <li><i class="fas fa-phone"></i> <span id="footerPhone">+91 9876543210</span></li>
+                        <li><i class="fas fa-envelope"></i> info@freshfarm.com</li>
+                        <li><i class="fas fa-clock"></i> <span id="footerHours">Mon-Sun: 7:00 AM - 9:00 PM</span></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="contact-info">
+                        <li><a href="#home" style="color: white;">Home</a></li>
+                        <li><a href="#products" style="color: white;">Products</a></li>
+                        <li><a href="#about" style="color: white;">About Us</a></li>
+                        <li><a href="#contact" style="color: white;">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Location</h3>
+                    <div class="map-container">
+                        <p>Google Maps Integration<br>Location: Aravakurichi, Tamil Nadu</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Fresh Farm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
