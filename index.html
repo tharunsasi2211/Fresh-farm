@@ -27,6 +27,9 @@
                 <div class="auth-buttons">
                     <button class="btn btn-outline" id="customerLoginBtn">Customer Login</button>
                     <button class="btn btn-primary" id="ownerLoginBtn">Owner Login</button>
+                    <button class="btn btn-danger" id="closeWebsiteBtn" style="display: none;">
+                        <i class="fas fa-power-off"></i> logout
+                    </button>
                 </div>
             </div>
         </div>
@@ -178,7 +181,7 @@
                         <span>Total:</span>
                         <span id="customerTotalAmount">₹0.00</span>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;">Proceed to Checkout</button>
+                    <button class="btn btn-primary" id="proceedToPayment" style="width: 100%; margin-top: 15px;">Proceed to Payment</button>
                 </div>
             </div>
         </div>
@@ -215,7 +218,7 @@
                         <span>Total:</span>
                         <span id="totalAmount">₹0.00</span>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;">Proceed to Checkout</button>
+                    <button class="btn btn-primary" id="guestProceedToPayment" style="width: 100%; margin-top: 15px;">Proceed to Payment</button>
                 </div>
             </div>
         </div>
@@ -239,10 +242,18 @@
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                        <div class="password-container">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                            <span class="toggle-password" id="toggleLoginPassword">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
                 </form>
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+                </div>
             </div>
             
             <div class="tab-content" id="registerTab">
@@ -262,13 +273,74 @@
                     </div>
                     <div class="form-group">
                         <label for="regPassword">Password</label>
-                        <input type="password" id="regPassword" class="form-control" placeholder="Create a password" required>
+                        <div class="password-container">
+                            <input type="password" id="regPassword" class="form-control" placeholder="Create a password" required>
+                            <span class="toggle-password" id="toggleRegPassword">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Reset Password</h3>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="resetMobile">Mobile Number</label>
+                    <input type="text" id="resetMobile" class="form-control" placeholder="Enter your registered mobile number" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Reset Password</button>
+            </form>
+            <div id="resetMessage" style="margin-top: 15px; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Payment Page -->
+    <section class="payment-page" id="paymentPage" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Payment</h2>
+            <div class="payment-section">
+                <div class="payment-methods">
+                    <h3>Select Payment Method</h3>
+                    <div class="payment-option">
+                        <input type="radio" id="upi" name="paymentMethod" value="upi" checked>
+                        <label for="upi">UPI Payment</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="cod" name="paymentMethod" value="cod">
+                        <label for="cod">Cash on Delivery</label>
+                    </div>
+                    
+                    <div id="upiDetails" class="payment-details">
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FreshFarmPayment" alt="QR Code for Payment">
+                            <p>UPI ID: freshfarm@upi</p>
+                        </div>
+                    </div>
+                    
+                    <div id="codDetails" class="payment-details" style="display: none;">
+                        <p>Pay when your order is delivered</p>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div id="paymentOrderSummary">
+                        <!-- Order summary will be loaded here -->
+                    </div>
+                    <button class="btn btn-primary" id="confirmPayment" style="width: 100%; margin-top: 20px;">Confirm Order</button>
+                    <button class="btn btn-outline" id="backToCart" style="width: 100%; margin-top: 10px;">Back to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Owner Login Modal -->
     <div class="modal" id="ownerModal">
@@ -282,11 +354,21 @@
                 </div>
                 <div class="form-group">
                     <label for="ownerPassword">Password</label>
-                    <input type="password" id="ownerPassword" class="form-control" placeholder="Enter your password" required>
+                    <div class="password-container">
+                        <input type="password" id="ownerPassword" class="form-control" placeholder="Enter your password" required>
+                        <span class="toggle-password" id="toggleOwnerPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="secretKey">Secret Key</label>
-                    <input type="password" id="secretKey" class="form-control" placeholder="Enter secret key" required>
+                    <div class="password-container">
+                        <input type="password" id="secretKey" class="form-control" placeholder="Enter secret key" required>
+                        <span class="toggle-password" id="toggleSecretKey">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
             </form>
@@ -304,7 +386,6 @@
                     <span id="statusText">Open</span>
                     <button class="btn btn-outline" id="toggleStatusBtn">Close Shop</button>
                 </div>
-                <button class="btn btn-outline" id="logoutBtn">Logout</button>
             </div>
             
             <div class="dashboard-tabs">
