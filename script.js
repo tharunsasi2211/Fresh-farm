@@ -7,7 +7,7 @@ const appData = {
         { id: 4, name: "Fresh Carrots", price: 50, category: "vegetables", stock: 25, image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
         { id: 5, name: "Ripe Bananas", price: 50, category: "fruits", stock: 35, image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
         { id: 6, name: "Fresh Potatoes", price: 40, category: "vegetables", stock: 60, image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" },
-        { id: 7, name: "Fresh Mangoes", price: 80, category: "fruits", stock: 20, image: "https://media.istockphoto.com/id/168278888/photo/fresh-slices-of-mango-on-a-bed-of-leaves.jpg?s=612x612&w=0&k=20&c=Wmtif6WbhUhNZADb8Ay_CnA26McrL-A3tS8V9M65C5w=" },
+        { id: 7, name: "Fresh Mangoes", price: 80, category: "fruits", stock: 20, image:"https://media.istockphoto.com/id/168278888/photo/fresh-slices-of-mango-on-a-bed-of-leaves.jpg?s=612x612&w=0&k=20&c=Wmtif6WbhUhNZADb8Ay_CnA26McrL-A3tS8V9M65C5w=" },
         { id: 8, name: "Sweet Guavas", price: 50, category: "fruits", stock: 25, image: "https://media.istockphoto.com/id/1224636159/photo/closeup-of-a-red-guava-cut-in-half-in-the-background-several-guavas-and-green-leaf.jpg?s=612x612&w=0&k=20&c=KJ9YilkRRuFh0bnw64Ol0IZDfoQF7UIxyC6dRVIjaoA=" },
         { id: 9, name: "Fresh Grapes", price: 70, category: "fruits", stock: 25, image: "https://images.pexels.com/photos/60021/grapes-wine-fruit-vines-60021.jpeg?cs=srgb&dl=pexels-pixabay-60021.jpg&fm=jpg" },
         { id: 10, name: "Fresh Brinjal", price: 60, category: "vegetables", stock: 30, image: "https://cdn.bazodo.com/images/p/7/3/9/739-large_default.jpg" },
@@ -1196,12 +1196,37 @@ function updatePaymentOrderSummary() {
     paymentOrderSummary.innerHTML = summaryHTML;
 }
 
+// FIXED: handlePayment function - Now stays in customer dashboard after payment
 function handlePayment() {
     const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
     
+    // Calculate total for points
+    let subtotal = appData.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryCharge = subtotal > 500 ? 0 : 50;
+    const discount = appData.currentCustomer ? calculateLoyaltyDiscount(subtotal) : 0;
+    const total = subtotal + deliveryCharge - discount;
+    
+    // UPDATE LOYALTY POINTS - 1 point per ₹100 spent
+    if (appData.currentCustomer) {
+        const pointsEarned = Math.floor(total / 100);
+        appData.currentCustomer.loyaltyPoints = (appData.currentCustomer.loyaltyPoints || 0) + pointsEarned;
+        
+        // Update display
+        loyaltyPoints.textContent = appData.currentCustomer.loyaltyPoints;
+        
+        // Update in customers array
+        const customerIndex = appData.customers.findIndex(c => c.id === appData.currentCustomer.id);
+        if (customerIndex !== -1) {
+            appData.customers[customerIndex].loyaltyPoints = appData.currentCustomer.loyaltyPoints;
+        }
+        
+        if (pointsEarned > 0) {
+            showNotification(`You earned ${pointsEarned} loyalty points! Total: ${appData.currentCustomer.loyaltyPoints} points`);
+        }
+    }
+    
     if (paymentMethod === 'upi') {
         showNotification('Please complete the UPI payment to confirm your order.');
-        // In a real app, you would integrate with a payment gateway
     } else {
         showNotification('Your order has been placed successfully! You will pay when your order is delivered.');
     }
@@ -1210,13 +1235,18 @@ function handlePayment() {
     appData.cart = [];
     updateCartDisplay();
     
-    // Return to products page
+    // FIXED: Always return to customer dashboard if customer is logged in
     setTimeout(() => {
         hidePaymentPage();
-        if (customerDashboard.style.display === 'block') {
+        if (appData.currentCustomer) {
+            // Stay in customer dashboard to see loyalty points
             customerDashboard.style.display = 'block';
+            document.querySelector('#products').style.display = 'none';
+            document.querySelector('#cart').style.display = 'none';
         } else {
+            // Guest users go back to products page
             document.querySelector('#products').style.display = 'block';
+            document.querySelector('#cart').style.display = 'block';
         }
     }, 3000);
 }
